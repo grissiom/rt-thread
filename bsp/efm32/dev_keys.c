@@ -42,7 +42,9 @@
 /* Private variables ---------------------------------------------------------*/
 static struct efm32_joy_device              joy;
 static struct rt_device                     joy_dev;
+#if defined(RT_USING_RTGUI)
 static struct rtgui_event_mouse             mouse;
+#endif
 static rt_bool_t                            click;
 
 /* Private functions ---------------------------------------------------------*/
@@ -115,7 +117,6 @@ static void efm32_keys_isr(rt_device_t dev)
         default:
             break;
         }
-#endif
 
         if (joystick)
         {
@@ -149,6 +150,7 @@ static void efm32_keys_isr(rt_device_t dev)
                 rt_timer_stop(&joy.timer);
             }
         }
+#endif
     }
 
     if (flag & BC_INTFLAG_AEM)
@@ -252,9 +254,11 @@ static rt_err_t efm32_keys_init (rt_device_t dev)
     joy.min_y           = 0;
     joy.max_y           = lcd_info.height;
 
+#if defined(RT_USING_RTGUI)
     mouse.parent.sender = RT_NULL;
     mouse.wid           = RT_NULL;
     mouse.button        = 0;
+#endif
 
     return RT_EOK;
 }

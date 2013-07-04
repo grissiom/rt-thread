@@ -58,6 +58,7 @@
 #if defined(EFM32_USING_LCD)
 #include "dev_lcd.h"
 
+#if defined(RT_USING_RTGUI)
 #include <rtgui/rtgui_server.h>
 #include <rtgui/rtgui_system.h>
 #include <rtgui/rtgui_app.h>
@@ -66,8 +67,9 @@
 #include <rtgui/widgets/window.h>
 #include <rtgui/widgets/box.h>
 #include <rtgui/image.h>
+#endif
 
- #if defined(RTGUI_USING_DFS_FILERW)
+#if defined(RTGUI_USING_DFS_FILERW)
  #include <dfs_posix.h>
  #define PATH_SEPARATOR     '/'
  #endif
@@ -573,7 +575,7 @@ void rt_demo_thread_entry(void* parameter)
 }
 #endif /* defined(EFM32_USING_ETHERNET) */
 
-#if (defined(EFM32_USING_LCD) && !defined(APP_PHOTO_FRAME))
+#if (defined(RT_USING_RTGUI) && defined(EFM32_USING_LCD) && !defined(APP_PHOTO_FRAME))
 {
     rt_kprintf("LCD DEMO start...\n");
 
@@ -599,7 +601,7 @@ void rt_demo_thread_entry(void* parameter)
 }
 #endif
 
-#if defined(APP_PHOTO_FRAME)
+#if (defined(RT_USING_RTGUI) && defined(APP_PHOTO_FRAME))
 {
     rt_kprintf("Photo frame DEMO start...\n");
 

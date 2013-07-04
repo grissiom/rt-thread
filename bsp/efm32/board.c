@@ -398,7 +398,7 @@ void rt_hw_driver_init(void)
 #endif
 
     /* Initialize LCD */
-#if defined(EFM32_USING_LCD)
+#if (defined(EFM32_USING_LCD) && defined(RT_USING_RTGUI))
     efm32_spiLcd_init();
 #endif
 

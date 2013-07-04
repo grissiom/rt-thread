@@ -242,6 +242,7 @@ rt_err_t rt_memheap_init(struct rt_memheap *memheap,
                          rt_uint32_t        size);
 rt_err_t rt_memheap_detach(struct rt_memheap *heap);
 void* rt_memheap_alloc(struct rt_memheap *heap, rt_uint32_t size);
+void *rt_memheap_realloc(struct rt_memheap* heap, void* ptr, rt_size_t newsize);
 void rt_memheap_free(void *ptr);
 #endif
 
@@ -452,7 +453,11 @@ void rt_system_module_init(void);
 /*
  * general kernel service
  */
+#ifndef RT_USING_CONSOLE
+#define rt_kprintf(...)
+#else
 void rt_kprintf(const char *fmt, ...);
+#endif
 rt_int32_t rt_vsprintf(char *dest, const char *format, va_list arg_ptr);
 rt_int32_t rt_sprintf(char *buf ,const char *format, ...);
 rt_int32_t rt_snprintf(char *buf, rt_size_t size, const char *format, ...);
