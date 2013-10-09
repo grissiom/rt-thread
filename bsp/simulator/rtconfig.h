@@ -237,5 +237,6 @@
 /* #define RTGUI_IMAGE_PNG */
 #define RTGUI_USING_NOTEBOOK_IMAGE
 #define RT_USING_RYM
+#define RT_USING_LOGTRACE
 
 #endif
