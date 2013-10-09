@@ -17,7 +17,7 @@ before_script:
   - export RTT_RTGUI=$HOME/RTGUI/components/rtgui
 
 script:
-  - scons -C bsp/$RTT_BSP
+  - scons -k -C bsp/$RTT_BSP
 
 env:
   - RTT_BSP='simulator' RTT_CC='clang-analyze' RTT_EXEC_PATH=/usr/share/clang/scan-build
