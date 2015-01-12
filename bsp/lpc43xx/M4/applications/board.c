@@ -43,13 +43,18 @@ void rt_hw_board_init()
 {
 #ifdef CORE_M4
     /* NVIC Configuration */
-#ifdef  VECT_TAB_RAM
+# ifdef  VECT_TAB_RAM
     /* Set the Vector Table base location at 0x10000000 */
     SCB->VTOR  = 0x10000000;
-#else  /* VECT_TAB_FLASH  */
-    /* Set the Vector Table base location at 0x00000000 */
-    SCB->VTOR  = 0x1A000000;
-#endif
+# else  /* VECT_TAB_FLASH  */
+#  ifdef __CC_ARM
+    extern unsigned long __Vectors;
+    SCB->VTOR  = (unsigned long)&__Vectors;
+#  elif defined(__GNUC__)
+    extern unsigned long __interrupt_vector;
+    SCB->VTOR  = (unsigned long)&__interrupt_vector;
+#  endif
+# endif
 #endif
     /* update the core clock */
     SystemCoreClockUpdate();
