@@ -40,6 +40,13 @@ SECTIONS
         __vsymtab_end = .;
         . = ALIGN(4);
 
+        /* section information for initial. */
+        . = ALIGN(4);
+        __rt_init_start = .;
+        KEEP(*(SORT(.rti_fn*)))
+        __rt_init_end = .;
+        . = ALIGN(4);
+
         . = ALIGN(4);
         _etext = .;
     } > CODE = 0
@@ -93,7 +100,7 @@ SECTIONS
 
         . = ALIGN(4);
         /* This is used by the startup in order to initialize the .bss secion */
-        _ebss = . ;        
+        _ebss = . ;
         *(.bss.init)
     } > DATA
     __bss_end = .;

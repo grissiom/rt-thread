@@ -68,6 +68,9 @@ void rt_init_thread_entry(void *parameter)
     log_trace_set_device(RT_CONSOLE_DEVICE_NAME);
 #endif
 
+#ifdef RT_USING_COMPONENTS_INIT
+	rt_components_init();
+#else
 #ifdef RT_USING_FINSH
     /* initialize finsh */
     finsh_system_init();
@@ -76,6 +79,7 @@ void rt_init_thread_entry(void *parameter)
 
 #ifdef RT_USING_VBUS
     rt_vbus_do_init();
+#endif
 #endif
 
     _boot_M0();

@@ -22,8 +22,6 @@
 //#define RT_USING_MODULE
 // <section name="RT_DEBUG" description="Kernel Debug Configuration" default="true" >
 #define RT_DEBUG
-// <bool name="RT_DEBUG_INIT" description="debug init enable" default=0 />
-#define RT_DEBUG_INIT   0
 // <bool name="RT_THREAD_DEBUG" description="Thread debug enable" default="false" />
 // #define RT_THREAD_DEBUG
 // <bool name="RT_USING_OVERFLOW_CHECK" description="Thread stack over flow detect" default="true" />
@@ -100,7 +98,8 @@
 // </section>
 
 // <bool name="RT_USING_COMPONENTS_INIT" description="Using RT-Thread components initialization" default="true" />
-//#define RT_USING_COMPONENTS_INIT
+#define RT_USING_COMPONENTS_INIT
+#define RT_DEBUG_INIT 0
 // <section name="RT_USING_FINSH" description="Using finsh as shell, which is a C-Express shell" default="true" >
 #define RT_USING_FINSH
 // <bool name="FINSH_USING_SYMTAB" description="Using symbol table in finsh shell" default="true" />
@@ -227,6 +226,5 @@
 #define RT_USING_LOGTRACE
 
 // </RDTConfigurator>
-
 
 #endif
