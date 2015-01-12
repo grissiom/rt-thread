@@ -280,6 +280,7 @@
  #endif
 #endif
 
+void SystemCoreClockUpdate(void);
 
 /*----------------------------------------------------------------------------
   System Core Clock variable
@@ -470,6 +471,9 @@ void SetClock (void) {
                         (IDIVE_IDIV     <<  2) |  /* IDIV                     */
                         (1              << 11) |  /* Autoblock En             */
                         (IDIVE_CLK_SEL  << 24) ;  /* Clock source             */
+
+  /* Update SystemCoreClock variable */
+  SystemCoreClockUpdate();
 }
 
 
@@ -882,9 +886,10 @@ void SystemInit (void) {
   SetClock();
 
   /* Configure External Memory Controller */
-  SystemInit_ExtMemCtl ();
-#endif
+  SystemInit_ExtMemCtl();
+#else
 
   /* Update SystemCoreClock variable */
   SystemCoreClockUpdate();
+#endif
 }
